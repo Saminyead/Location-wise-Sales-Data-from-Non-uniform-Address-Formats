@@ -1,45 +1,18 @@
-# Pandas-Data-Science-Tasks
-Set of real world data science tasks completed using the Python Pandas library.
+I created this fork Keith Galli's exercise on Data Analysis using the Pandas library in Python available on <a href="https://youtu.be/eMOA1pPVUc4">YouTube</a>.
+(Please read Keith_Galli_README.md for more information) The inspiration behind this was a particular exercise task which asked which city had the highest amount of sale 
+in USD. The way it was done in the video was to parse the string contained in the Purchase Address column between the first and the second comma. This worked because all
+the addresses were in the format - 'street, city, state and zip code'. But sometimes we may find a dataset, where the address is not formatted in this convenient manner.
+For example, some address may be 'house no., street, city, state', while others may be 'street, city, state, zip code.' This may happen when addresses are entered into 
+the front end of a data entry application, as different people have different ways of writing addresses. This is where the Geopy library comes in handy, as it is used as a
+client to check the address against popular geocoding services like OpenStreetMap, Google Maps, and others. The result is that, no matter what the format of the address is,
+it can be used to gain exact address - coordinates, name of city, county, state etc, provided the address is a real one. 
 
-## Setup
+I have run into two difficulty using geopy. 
 
-To access all of the files I recommend you fork this repo and then clone it locally. Instructions on how to do this can be found here: https://help.github.com/en/github/getting-started-with-github/fork-a-repo
+The first is the Nominatim API used for OpenStreetMap only allows 1 request per second. At that rate, it will take about 2 days to go through the entire dataframe.
 
-The other option is to click the green "clone or download" button and then click "Download ZIP". You then should extract all of the files to the location you want to edit your code.
+The second difficulty is that the Nominatim API will return a dictionary named 'address' containing the relevant information with indexes like house_no, road_no, county, city
+and so on. If I wish to get the names of cities from each of the address, for some of them, the 'address' dictionary would not contain a city index, and in stead contain town.
+Please check Geopy_In_Pandas_Dataframe.ipynb for further explanation. 
 
-Installing Jupyter Notebook: https://jupyter.readthedocs.io/en/latest/install.html <br/>
-Installing Pandas library: https://pandas.pydata.org/pandas-docs/stable/install.html 
-
-## Background Information:
-
-This repo goes with [my video](https://youtu.be/eMOA1pPVUc4) on "Solving real world data science videos with Python Pandas!". Here is some information on that video.
-
-In this video we use Python Pandas & Python Matplotlib to analyze and answer business questions about 12 months worth of sales data. The data contains hundreds of thousands of electronics store purchases broken down by month, product type, cost, purchase address, etc. 
-
-We start by cleaning our data. Tasks during this section include:
-- Drop NaN values from DataFrame
-- Removing rows based on a condition
-- Change the type of columns (to_numeric, to_datetime, astype)
-
-Once we have cleaned up our data a bit, we move the data exploration section. In this section we explore 5 high level business questions related to our data:
-- What was the best month for sales? How much was earned that month?
-- What city sold the most product?
-- What time should we display advertisemens to maximize the likelihood of customer’s buying product?
-- What products are most often sold together?
-- What product sold the most? Why do you think it sold the most?
-
-To answer these questions we walk through many different pandas & matplotlib methods. They include:
-- Concatenating multiple csvs together to create a new DataFrame (pd.concat)
-- Adding columns
-- Parsing cells as strings to make new columns (.str)
-- Using the .apply() method
-- Using groupby to perform aggregate analysis
-- Plotting bar charts and lines graphs to visualize our results
-- Labeling our graphs
-
-Check out the first video I did on Pandas: <br/>
-https://youtu.be/vmEHCJofslg 
-
-Check out the videos I did on Matplotlib: <br/>
-https://youtu.be/DAQNHzOcO5A <br/>
-https://youtu.be/0P7QnIQDBJY
+If you wish to work on this problem, feel free to fork and leave a pull request.
